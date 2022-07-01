@@ -2,7 +2,7 @@ from rdutilities.rdutilities import RDUtilities
 from tools.tools import Settings
 
 settings = Settings("private/settings.json")
-rd = RDUtilities(api_key=settings.config.REALDEBRID.AUTH_TOKEN)
+rd = RDUtilities(api_key=settings.config.real_debrid.api_key)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
