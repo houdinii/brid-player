@@ -1,16 +1,23 @@
-# This is a sample Python script.
+from rdutilities.rdutilities import RDUtilities
+from tools.tools import Settings
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
+settings = Settings("private/settings.json")
+rd = RDUtilities(api_key=settings.config.REALDEBRID.AUTH_TOKEN)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # Simple loop to test functionality
+    while True:
+        magnet = input("Enter a magnet link or 'exit' to exit: ")
+        if magnet == "exit":
+            break
+        result = rd.check_link(link=magnet)
+        print("RESULT:", result)
+        if bool(result):
+            choice = input("Would you like to add this magnet to your library? (y/n): ")
+            if choice.upper() == "Y":
+                rd.add_magnet(magnet)
+                print("Magnet added to library!")
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
