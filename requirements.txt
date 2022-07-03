@@ -1,0 +1,5 @@
+flask_restful
+flask_cors
+python-box
+1337x
+requests
