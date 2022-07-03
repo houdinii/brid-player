@@ -1,6 +1,5 @@
 import requests
 import json
-import vlc
 import time
 import pprint
 

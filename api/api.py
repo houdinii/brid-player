@@ -7,7 +7,6 @@ from flask_cors import CORS
 import pprint
 import requests
 import json
-# from realdebrid.realdebrid import RealDebrid
 from rdutilities.rdutilities import RDUtilities
 from tools.tools import Settings
 
