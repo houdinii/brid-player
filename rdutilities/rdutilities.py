@@ -1,5 +1,10 @@
 import requests
 import json
+import vlc
+import time
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4).pprint
 
 
 class RDUtilities:
@@ -37,6 +42,7 @@ class RDUtilities:
         8DBB673D4F0AB8BFF6079E0A05C39E85320D4A2A
         """
 
+        # print(f"magnet_link: {magnet_link}")
         result = magnet_link.split('?')[1]
         result_list = result.split('&')
 
@@ -48,22 +54,40 @@ class RDUtilities:
         return None
 
     def query_rd_by_hash(self, hash):
+        print(f"AUTH: {self.auth_key}")
         get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
         result = list(requests.get(get_str).json().values())[0]
         if len(result) == 0:
             return False, []
         else:
-            return True, result['rd']
+            print(f"RESULT: {result}")
+            return True, result
+
+    def delete_download(self, download_id):
+        delete_str = f"{self.host}/downloads/delete/{download_id}?auth_token={self.auth_key}"
+        # get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
+        result = requests.delete(delete_str)
+        # result = list(requests.get(get_str).json().values())[0]
+        # if len(result) == 0:
+        #     return False, []
+        # else:
+        print(f"RESULT: {result}")
+        return result
 
     def check_link(self, link):
-        hash = self.get_magnet_hash(link)
+        if link.startswith("magnet:"):
+            hash = self.get_magnet_hash(link)
+            print(f"HASH: {hash}")
+        else:
+            print(f"HASH: {link}")
+            hash = link
         if hash is not None:
             status, result = self.query_rd_by_hash(hash)
             if not status or len(result) == 0:
                 print(f"Link is not cached!")
-                return False
+                return False, None
             print(f"Link is cached!")
-            return True
+            return True, result
 
     def add_magnet(self, magnet):
         # HTML request header
@@ -88,6 +112,7 @@ class RDUtilities:
         # Try to select file in magnet on Real-Debrid
         try:
             id = result.json()["id"]
+            print(f"FILE ID: {id}")
             select_data = {"files": "all"}
             select_url = "https://api.real-debrid.com/rest/1.0/torrents/selectFiles/" + id
             requests.post(select_url, headers=headers, data=select_data)
@@ -96,3 +121,53 @@ class RDUtilities:
             print("Magnet couldn't be activated on Real-Debrid (requires manual activation).")
         print("Added magnet to Real-Debrid.")
         return True
+
+    def get_downloads(self, all=False, page=1, limit=100, offset=0):
+        if not all:
+            get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&offset={offset}&page={page}"
+            result = requests.get(get_str).json()
+            return True, result
+        else:
+            # Get number of results
+            # Get limit and ignore offset
+            # pages = (number of results / limit ) + 1
+            # If the result is empty, you have reached the end of the list
+            initial_get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={page}"
+            initial_result = requests.get(initial_get_str)
+            headers = initial_result.headers
+            print(f"HEADERS: {headers}")
+            x_count = int(headers["X-Total-Count"])
+            pp(f"TOTAL ITEMS: {x_count}")
+            pages = (x_count // limit) + 1
+            print(f"PAGES: {pages}")
+
+            # Get all pages
+            results = []
+            print("Getting all pages...")
+            for i in range(1, pages + 1):
+                print(f"Getting page {i}...")
+                get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={i}"
+                result = requests.get(get_str).json()
+                if result:
+                    results.append(result)
+                else:
+                    break
+            # pp(f"\n------------------------------------------------\nRESULTS: {results}")
+            with open('downloads.txt', 'w') as filehandle:
+                json.dump(results, filehandle)
+            return True, results
+
+    def get_detailed_info(self, download_id):
+        get_str = f"{self.host}/streaming/mediaInfos/{download_id}?auth_token={self.auth_key}"
+        result = requests.get(get_str).json()
+        return result
+
+    def get_available_formats(self, download_id):
+        get_str = f"{self.host}/streaming/transcode/{download_id}?auth_token={self.auth_key}"
+        result = requests.get(get_str).json()
+        return result
+
+    def process_dl_file(self, filename):
+        with open(filename, 'r') as filehandle:
+            data = json.load(filehandle)
+        return data

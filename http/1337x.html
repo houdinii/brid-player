@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>let exports = {};</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Houdinii's 1337x To Real Debrid Pipeline</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css"/>
+
+     <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/1337x.js"></script>
+    <style>
+        .found {
+            background: #3eb63e !important;
+            color: #f8f7f3 !important;
+        }
+        .found:hover {
+            background:#25572a !important;
+            color: #c0bdbd !important;
+        }
+        .not-found {
+            background: #ff1a1a !important;
+            color: #f8f7f3 !important;
+        }
+        .not-found:hover {
+            background:#bb2626 !important;
+            color: #c0bdbd !important;
+        }
+
+        #results{
+            height:400px;
+            width: 1400px;
+            /*padding:0 0 0 25px;*/
+            /*margin-bottom:25px;*/
+            /*position:relative;*/
+            /*border-right: 1px #f8f7f3 solid;*/
+            overflow-x:auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Houdinii's 1337x To Real Debrid Pipeline</h2><br>
+    <label for="txtQuery">Search For: </label>
+    <input type="text" name="txtQuery" id="txtQuery" class="textbox">
+    <button type="submit" id="btnSearch" class="button">Search</button><br/><hr/>
+
+    <button type="submit" id="btnPopularMoviesWeek" class="button">Popular Movie Torrents This Week</button>
+    <button type="submit" id="btnPopularMovies" class="button">Popular Movie Torrents Today</button>
+    <button type="submit" id="btnPopularTVWeek" class="button">Popular TV Torrents This Week</button>
+    <button type="submit" id="btnPopularTV" class="button">Popular TV Torrents Today</button><br/>
+
+    <button type="submit" id="btnTrendingMoviesWeek" class="button">Trending Movie Torrents This Week</button>
+    <button type="submit" id="btnTrendingMovies" class="button">Trending Movie Torrents Today</button>
+    <button type="submit" id="btnTrendingTVWeek" class="button">Trending TV Torrents This Week</button>
+    <button type="submit" id="btnTrendingTV" class="button">Trending TV Torrents Today</button><br/>
+
+    <button type="submit" id="btnTop100Movies" class="button">Top 100 Movie Torrents</button>
+    <button type="submit" id="btnTop100TV" class="button">Top 100 TV Torrents</button>
+</div>
+<hr>
+<div id="results">
+    <!-- Results will be displayed here -->
+    <!-- Don't forget to clear out old results first!! -->
+</div>
+<br/>
+<div id="details">
+    <!-- Details will be displayed here -->
+    <!-- Don't forget to clear out old details first!! -->
+</div>
+<div id="gallery">
+    <!-- Details will be displayed here -->
+    <!-- Don't forget to clear out old details first!! -->
+</div>
+<div id="vid_player">
+
+    <!-- HTML -->
+    <video id='hls-example'  class="video-js vjs-default-skin" width="400" height="300" controls>
+    <source type="application/x-mpegURL" src="https://28.stream.real-debrid.com/t/5FOLD5NZ652I623/eng1/none/aac/full.m3u8">
+    </video>
+
+
+    <!-- JS code -->
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hola-video.js/5.10.2-27/ie8/videojs-ie8.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+
+    <script>
+    var player = videojs('hls-example');
+    player.play();
+    </script>
+
+</div>
+</body>
+</html>
