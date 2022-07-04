@@ -1,4 +1,3 @@
-from rdutilities.rdutilities import RDUtilities
 from tools.tools import Settings
 from api.api import app
 
