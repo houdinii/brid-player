@@ -1,10 +1,7 @@
 from rdutilities.rdutilities import RDUtilities
 from tools.tools import Settings
-from api.api import app
 from dbutilities.dbutilities import DBUtilities
 import pprint
-import sqlite3
-from ncis_ids import ids_for_detailed_info
 
 settings = Settings("private/settings.json")
 rd = RDUtilities(api_key=settings.config.real_debrid.api_key)

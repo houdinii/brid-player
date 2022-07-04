@@ -1,6 +1,5 @@
 import requests
 import json
-import time
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4).pprint
