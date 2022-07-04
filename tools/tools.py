@@ -3,6 +3,12 @@ from box import Box
 
 
 def read_json(file_path):
+    """Reads a json file and returns a dictionary
+
+    :param file_path: Path to the json file
+    :return: Returns a dictionary with the json file content
+    """
+
     try:
         with open(file_path, 'r') as f:
             return json.load(f)
@@ -23,6 +29,12 @@ class Settings:
 
     @staticmethod
     def get_settings(file_path):
+        """Reads the settings from the JSON file.
+
+        :param file_path: Path to the JSON file.
+        :return: Box object containing the settings.
+        """
+
         settings = read_json(file_path)
         if settings is None:
             print("No settings file found.")
