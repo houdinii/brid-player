@@ -1,7 +1,7 @@
 // noinspection JSUnresolvedVariable
 // noinspection UnnecessaryLocalVariableJS
 
-const host = "http://192.168.1.61:5001/";
+const host = "http://localhost:5001/";
 const max_pages = 5;
 
 function processResults(results) {
