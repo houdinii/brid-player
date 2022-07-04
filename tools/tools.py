@@ -21,7 +21,8 @@ class Settings:
     def __init__(self, file_path):
         self.config = self.get_settings(file_path)
 
-    def get_settings(self, file_path):
+    @staticmethod
+    def get_settings(file_path):
         settings = read_json(file_path)
         if settings is None:
             print("No settings file found.")

@@ -28,7 +28,8 @@ rd = RDUtilities(api_key=settings.config.real_debrid.api_key)
 
 
 class TorrentList(Resource):
-    def get(self, query, max_pages=10):
+    @staticmethod
+    def get(query, max_pages=10):
         raw_results = torrents.search(query)
         results = {'items': raw_results['items']}
 
@@ -54,7 +55,8 @@ class TorrentList(Resource):
 
 
 class TorrentAdd(Resource):
-    def get(self, id):
+    @staticmethod
+    def get(id):
         # This function is going to add the item to RD drive.
 
         info = torrents.info(torrentId=id)
@@ -70,7 +72,8 @@ class TorrentAdd(Resource):
 
 
 class CheckCache(Resource):
-    def get(self, link, *args):
+    @staticmethod
+    def get(link, *args):
         magnet_list = list(flask.request.args.to_dict().items())
         magnet = "magnet:?"
         for item in magnet_list:
@@ -89,7 +92,8 @@ class CheckCache(Resource):
 
 
 class TorrentDetails(Resource):
-    def get(self, id):
+    @staticmethod
+    def get(id):
         # This function is going to get the details of a torrent.
 
         info = torrents.info(torrentId=id)
@@ -102,77 +106,88 @@ class TorrentDetails(Resource):
 
 
 class PopularTVWeek(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.popular(category='tv', week=True)
         print(results)
         return results, 200
 
 
 class PopularTV(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.popular(category='tv', week=False)
         print(results)
         return results, 200
 
 
 class PopularMovieWeek(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.popular(category='movies', week=True)
         print(results)
         return results, 200
 
 
 class PopularMovie(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.popular(category='movies', week=False)
         print(results)
         return results, 200
 
 
 class TrendingTVWeek(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.trending(category='tv', week=True)
         print(results)
         return results, 200
 
 
 class TrendingTV(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.trending(category='tv', week=False)
         print(results)
         return results, 200
 
 
 class TrendingMovieWeek(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.trending(category='movies', week=True)
         print(results)
         return results, 200
 
 
 class TrendingMovie(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.trending(category='movies', week=False)
         print(results)
         return results, 200
 
 
 class Top100Movie(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.top(category='movies')
         print(results)
         return results, 200
 
 
 class Top100TV(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         results = torrents.top(category='tv')
         print(results)
         return results, 200
 
 
 class CheckMagnetFromId(Resource):
-    def get(self, id):
+    @staticmethod
+    def get(id):
         print(f"Torrent ID: {id}")
         info = torrents.info(torrentId=id)
         pp(info)

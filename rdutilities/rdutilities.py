@@ -14,7 +14,8 @@ class RDUtilities:
         self.api = "/rest/1.0"
         self.host = f"{self.protocol}{self.base}{self.api}"
 
-    def get_magnet_hash(self, magnet_link):
+    @staticmethod
+    def get_magnet_hash(magnet_link):
         """
         Extracts and returns the SHA1 hash of a magnet link.
 
@@ -166,7 +167,8 @@ class RDUtilities:
         result = requests.get(get_str).json()
         return result
 
-    def process_dl_file(self, filename):
+    @staticmethod
+    def process_dl_file(filename):
         with open(filename, 'r') as filehandle:
             data = json.load(filehandle)
         return data
