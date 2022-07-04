@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css"/>
 
-     <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+<!--     <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/1337x.js"></script>
@@ -30,6 +30,9 @@
             background:#bb2626 !important;
             color: #c0bdbd !important;
         }
+        .searching{
+            background: red !important;
+        }
 
         #results{
             height:400px;
@@ -45,9 +48,10 @@
 <body>
 <div class="container">
     <h2>Houdinii's 1337x To Real Debrid Pipeline</h2><br>
+
     <label for="txtQuery">Search For: </label>
     <input type="text" name="txtQuery" id="txtQuery" class="textbox">
-    <button type="submit" id="btnSearch" class="button">Search</button><br/><hr/>
+    <button type="submit" id="btnSearch" class="search button">Search</button><br/><hr/>
 
     <button type="submit" id="btnPopularMoviesWeek" class="button">Popular Movie Torrents This Week</button>
     <button type="submit" id="btnPopularMovies" class="button">Popular Movie Torrents Today</button>
@@ -86,14 +90,14 @@
 
     <!-- JS code -->
     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hola-video.js/5.10.2-27/ie8/videojs-ie8.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/hola-video.js/5.10.2-27/ie8/videojs-ie8.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>-->
+<!--    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>-->
 
-    <script>
-    var player = videojs('hls-example');
-    player.play();
-    </script>
+<!--    <script>-->
+<!--    var player = videojs('hls-example');-->
+<!--    player.play();-->
+<!--    </script>-->
 
 </div>
 </body>

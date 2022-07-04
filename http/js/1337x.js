@@ -4,6 +4,7 @@
 // TODO: Change this to use a settings file
 const host = "http://briandesktop:5001/";
 const max_pages = 5;
+let search_btn = $('.search')
 
 function processResults(results) {
     let items = results.items;
@@ -166,6 +167,7 @@ function processResults(results) {
     }
 
 function submit_search() {
+    console.log("Searching...")
     const search_string = document.getElementById("txtQuery").value;
     if (search_string === "") {
         alert("Please enter a search string.");
@@ -258,10 +260,21 @@ function top100(movies=true){
 }
 
 $(document).ready(function(){
-    $("#btnSearch").click(function(){
-        console.log("Searching...")
-        submit_search();
+    $('#txtQuery').keypress(function(event){
+        let keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            $("#btnSearch").toggleClass('searching')
+            submit_search();
+            $("#btnSearch").toggleClass('searching')
+        }
     });
+
+    $("#btnSearch").click(function(){
+        $(this).toggleClass('searching')
+        submit_search();
+        $(this).toggleClass('searching')
+    });
+
     $("#btnPopularMoviesWeek").click(function(){
         console.log(`btnPopularMoviesWeek Clicked.`);
         popular(true, true);
