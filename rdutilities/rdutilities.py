@@ -22,7 +22,6 @@ class RDUtilities:
         :return: The SHA1 hash of the magnet link.
         """
 
-        # print(f"magnet_link: {magnet_link}")
         result = magnet_link.split('?')[1]
         result_list = result.split('&')
 
@@ -59,12 +58,7 @@ class RDUtilities:
         """
 
         delete_str = f"{self.host}/downloads/delete/{download_id}?auth_token={self.auth_key}"
-        # get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
         result = requests.delete(delete_str)
-        # result = list(requests.get(get_str).json().values())[0]
-        # if len(result) == 0:
-        #     return False, []
-        # else:
         print(f"RESULT: {result}")
         return result
 
@@ -164,7 +158,6 @@ class RDUtilities:
                     results.append(result)
                 else:
                     break
-            # pp(f"\n------------------------------------------------\nRESULTS: {results}")
             with open('downloads.txt', 'w') as filehandle:
                 json.dump(results, filehandle)
             return True, results
