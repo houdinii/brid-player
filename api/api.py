@@ -68,9 +68,8 @@ class TorrentAdd(Resource):
 
         if result:
             return result, 200
-        else:
-            response = flask.jsonify({"error": "There was an error!"})
-            return response, 404
+        response = flask.jsonify({"error": "There was an error!"})
+        return response, 404
 
 
 class CheckCache(Resource):
@@ -111,9 +110,8 @@ class TorrentDetails(Resource):
 
         if info:
             return info, 200
-        else:
-            response = flask.jsonify({"error": "There was an error!"})
-            return response, 404
+        response = flask.jsonify({"error": "There was an error!"})
+        return response, 404
 
 
 class PopularTVWeek(Resource):
