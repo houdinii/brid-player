@@ -87,7 +87,6 @@ class CheckCache(Resource):
         for item in magnet_list:
             magnet += f"{item[0]}={item[1]}&"
         magnet = magnet[:-1]
-        torrent_hash = rd.get_magnet_hash(magnet)
         result, data = rd.check_link(magnet)
         print(f"Result: {result}")
         print(f"Data: {data}")
