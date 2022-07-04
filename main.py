@@ -3,7 +3,6 @@ from tools.tools import Settings
 from api.api import app
 
 settings = Settings("private/settings.json")
-# rd.api_key = settings.config.real_debrid.api_key
 
 
 # Press the green button in the gutter to run the script.

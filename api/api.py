@@ -18,13 +18,7 @@ torrents = py1337x()
 settings = Settings("private/settings.json")
 rd = RDUtilities(api_key=settings.config.real_debrid.api_key)
 
-# utilities = Utilities()
 
-# settings = utilities.get_settings()
-# host = settings['SERVER']['HOST']
-# port = int(settings['SERVER']['PORT'])
-# auth_token = settings["REALDEBRID"]["AUTH_TOKEN"]
-# max_pages = int(settings["1337X"]["MAX_PAGES"])
 
 
 class TorrentList(Resource):
@@ -72,7 +66,6 @@ class TorrentAdd(Resource):
 
         info = torrents.info(torrentId=id)
         magnet = info['magnetLink']
-        # result = utilities.add_magnet(magnet)
         result = rd.add_magnet(magnet)
 
         if result:
@@ -280,7 +273,6 @@ class CheckMagnetFromId(Resource):
         info = torrents.info(torrentId=id)
         pp(info)
         magnet = info['magnetLink']
-        # hash = rd.get_magnet_hash(magnet)
         result = None
         if magnet is None:
             result = False
