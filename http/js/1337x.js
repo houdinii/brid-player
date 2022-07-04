@@ -1,7 +1,8 @@
 // noinspection JSUnresolvedVariable
 // noinspection UnnecessaryLocalVariableJS
 
-const host = "http://localhost:5001/";
+// TODO: Change this to use a settings file
+const host = "http://briandesktop:5001/";
 const max_pages = 5;
 
 function processResults(results) {
