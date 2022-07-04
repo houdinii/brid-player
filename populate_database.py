@@ -20,7 +20,7 @@ if __name__ == '__main__':
     # LOAD DLS FROM FILE:
     # dls = rd.process_dl_file("downloads.txt")
     # ids = []
-    # GET LIST OF DOWNLOAD ID'S (dls[x]['id'])
+    # GET LIST OF DOWNLOAD ID'S (dls[x]['torrent_id'])
     # ADD DLS TO DOWNLOADS TABLE:
 
     db.connect("bpData.db")

@@ -42,7 +42,7 @@ class DBUtilities:
 
     def create_tables(self):
         create_download_table_query = '''CREATE TABLE bp_Downloads (
-                                         id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                         torrent_id INTEGER PRIMARY KEY AUTOINCREMENT,
                                          download_id TEXT,
                                          filename TEXT,
                                          mimeType TEXT,
@@ -57,7 +57,7 @@ class DBUtilities:
                                          '''
 
         create_detailed_info_table_query = '''CREATE TABLE bp_detailed_info(
-                                              id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                              torrent_id INTEGER PRIMARY KEY AUTOINCREMENT,
                                               download_id TEXT,
                                               filename TEXT,
                                               hoster TEXT,
@@ -77,7 +77,7 @@ class DBUtilities:
             );'''
 
         create_available_formats_table_query = '''CREATE TABLE bp_available_formats(
-                                                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                                  torrent_id INTEGER PRIMARY KEY AUTOINCREMENT,
                                                   download_id TEXT,
                                                   label TEXT,
                                                   extension TEXT
@@ -98,7 +98,7 @@ class DBUtilities:
         print(f"RECORD: {record}")
         print(f"TYPE RECORD: {type(record)}")
         try:
-            self.cursor.execute(insert_query, (record['id'], record['filename'], record['mimeType'], record['filesize'], record['link'], record['host'], record['host_icon'], record['chunks'], record['download'], record['streamable'], record['generated']))
+            self.cursor.execute(insert_query, (record['torrent_id'], record['filename'], record['mimeType'], record['filesize'], record['link'], record['host'], record['host_icon'], record['chunks'], record['download'], record['streamable'], record['generated']))
             self.conn.commit()
             return True
         except sqlite3.Error as error:

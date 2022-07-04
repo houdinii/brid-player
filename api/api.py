@@ -1,12 +1,12 @@
-from py1337x import py1337x
+import json
+import pprint
+
 import flask
 from flask import Response
-
-from flask_restful import Api, Resource
 from flask_cors import CORS
-import pprint
-import requests
-import json
+from flask_restful import Api, Resource
+from py1337x import py1337x
+
 from rdutilities.rdutilities import RDUtilities
 from tools.tools import Settings
 
@@ -17,8 +17,6 @@ api = Api(app)
 torrents = py1337x()
 settings = Settings("private/settings.json")
 rd = RDUtilities(api_key=settings.config.real_debrid.api_key)
-
-
 
 
 class TorrentList(Resource):
@@ -57,14 +55,14 @@ class TorrentList(Resource):
 
 class TorrentAdd(Resource):
     @staticmethod
-    def get(id):
+    def get(torrent_id):
         """Add a torrent to Real-Debrid
 
-        :param id: ID of the torrent to add
+        :param torrent_id: ID of the torrent to add
         :return: (result, 200) if successful, (response, 404) if not
         """
 
-        info = torrents.info(torrentId=id)
+        info = torrents.info(torrentId=torrent_id)
         magnet = info['magnetLink']
         result = rd.add_magnet(magnet)
 
@@ -76,18 +74,20 @@ class TorrentAdd(Resource):
 
 
 class CheckCache(Resource):
+    # noinspection PyUnusedLocal
     @staticmethod
     def get(link, *args):
         """Check if a link is cached in Real-Debrid
 
         :param link: Link to check
         :return: (result, 200) if successful, (response, 404) if not"""
+        print(f"link: {link}")
         magnet_list = list(flask.request.args.to_dict().items())
         magnet = "magnet:?"
         for item in magnet_list:
             magnet += f"{item[0]}={item[1]}&"
         magnet = magnet[:-1]
-        hash = rd.get_magnet_hash(magnet)
+        torrent_hash = rd.get_magnet_hash(magnet)
         result, data = rd.check_link(magnet)
         print(f"Result: {result}")
         print(f"Data: {data}")
@@ -101,14 +101,14 @@ class CheckCache(Resource):
 
 class TorrentDetails(Resource):
     @staticmethod
-    def get(id):
+    def get(torrent_id):
         """Get details about a torrent from 1337x
 
-        :param id: ID of the torrent to get details about
+        :param torrent_id: ID of the torrent to get details about
         :return: (result, 200) if successful, (response, 404) if not
         """
 
-        info = torrents.info(torrentId=id)
+        info = torrents.info(torrentId=torrent_id)
 
         if info:
             return info, 200
@@ -262,15 +262,15 @@ class Top100TV(Resource):
 
 class CheckMagnetFromId(Resource):
     @staticmethod
-    def get(id):
+    def get(torrent_id):
         """Check if a magnet is cached in Real-Debrid
 
-        :param id: ID of the torrent to check
+        :param torrent_id: ID of the torrent to check
         :return: (result, 200) if successful, (response, 500) if not
         """
 
-        print(f"Torrent ID: {id}")
-        info = torrents.info(torrentId=id)
+        print(f"Torrent ID: {torrent_id}")
+        info = torrents.info(torrentId=torrent_id)
         pp(info)
         magnet = info['magnetLink']
         result = None
@@ -281,13 +281,13 @@ class CheckMagnetFromId(Resource):
         try:
             return result, 200
         except Exception as e:
-            message = json.dumps({"error": "There was an error!"})
+            message = json.dumps({"error": f"There was an error!{e}"})
             return Response(message, status=500, mimetype='application/json')
 
 
 api.add_resource(TorrentList, '/get/<string:query>')
-api.add_resource(TorrentAdd, '/add/<string:id>')
-api.add_resource(TorrentDetails, '/details/<string:id>')
+api.add_resource(TorrentAdd, '/add/<string:torrent_id>')
+api.add_resource(TorrentDetails, '/details/<string:torrent_id>')
 api.add_resource(PopularTVWeek, '/PopularTVWeek/')
 api.add_resource(PopularTV, '/PopularTV/')
 api.add_resource(PopularMovieWeek, '/PopularMovieWeek/')
@@ -299,6 +299,4 @@ api.add_resource(TrendingMovie, '/TrendingMovie/')
 api.add_resource(Top100Movie, '/Top100Movie/')
 api.add_resource(Top100TV, '/Top100TV/')
 api.add_resource(CheckCache, '/Check/<string:link>')
-api.add_resource(CheckMagnetFromId, '/CheckMagnetFromId/<string:id>')
-
-
+api.add_resource(CheckMagnetFromId, '/CheckMagnetFromId/<string:torrent_id>')

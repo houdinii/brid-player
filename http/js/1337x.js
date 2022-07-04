@@ -125,7 +125,7 @@ function processResults(results) {
             });
         $(".btnCheckLink").click(function(){
             const torrentId = $(this).attr("id").substring(5);
-            // alert(`Check link button clicked for torrent with id: ${torrentId}`);
+            // alert(`Check link button clicked for torrent with torrent_id: ${torrentId}`);
 
             // Get magnet link from torrentId
             // check url based on magnet link

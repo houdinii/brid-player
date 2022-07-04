@@ -109,7 +109,7 @@ class RDUtilities:
 
         # Try to select file in magnet on Real-Debrid
         try:
-            id = result.json()["id"]
+            id = result.json()["torrent_id"]
             print(f"FILE ID: {id}")
             select_data = {"files": "all"}
             select_url = "https://api.real-debrid.com/rest/1.0/torrents/selectFiles/" + id
