@@ -119,6 +119,7 @@ function processResults(results) {
                     alert("Torrent downloaded to Real Debrid")
                 })
                 .catch(error => {
+                    // skipcq: JS-0002
                     console.log(error);
                     alert("Error downloading torrent to Real Debrid");
                 })
@@ -142,6 +143,7 @@ function processResults(results) {
                     }
                 })
                 .catch(error => {
+                    // skipcq: JS-0002
                     console.log(error);
                     alert("Error checking magnet link");
                 });
@@ -160,6 +162,7 @@ function processResults(results) {
                 processDetails(data, torrentId);
             })
             .catch(error => {
+                // skipcq: JS-0002
                 console.log(error);
                 alert("Error getting torrent details!");
             })
