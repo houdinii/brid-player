@@ -43,9 +43,8 @@ class RDUtilities:
         result = list(requests.get(get_str).json().values())[0]
         if len(result) == 0:
             return False, []
-        else:
-            print(f"RESULT: {result}")
-            return True, result
+        print(f"RESULT: {result}")
+        return True, result
 
     def delete_download(self, download_id):
         """Deletes a download from Real-Debrid.
@@ -132,34 +131,33 @@ class RDUtilities:
             get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&offset={offset}&page={page}"
             result = requests.get(get_str).json()
             return True, result
-        else:
-            # Get number of results
-            # Get limit and ignore offset
-            # pages = (number of results / limit ) + 1
-            # If the result is empty, you have reached the end of the list
-            initial_get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={page}"
-            initial_result = requests.get(initial_get_str)
-            headers = initial_result.headers
-            print(f"HEADERS: {headers}")
-            x_count = int(headers["X-Total-Count"])
-            pp(f"TOTAL ITEMS: {x_count}")
-            pages = (x_count // limit) + 1
-            print(f"PAGES: {pages}")
+        # Get number of results
+        # Get limit and ignore offset
+        # pages = (number of results / limit ) + 1
+        # If the result is empty, you have reached the end of the list
+        initial_get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={page}"
+        initial_result = requests.get(initial_get_str)
+        headers = initial_result.headers
+        print(f"HEADERS: {headers}")
+        x_count = int(headers["X-Total-Count"])
+        pp(f"TOTAL ITEMS: {x_count}")
+        pages = (x_count // limit) + 1
+        print(f"PAGES: {pages}")
 
-            # Get all pages
-            results = []
-            print("Getting all pages...")
-            for i in range(1, pages + 1):
-                print(f"Getting page {i}...")
-                get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={i}"
-                result = requests.get(get_str).json()
-                if result:
-                    results.append(result)
-                else:
-                    break
-            with open('downloads.txt', 'w') as filehandle:
-                json.dump(results, filehandle)
-            return True, results
+        # Get all pages
+        results = []
+        print("Getting all pages...")
+        for i in range(1, pages + 1):
+            print(f"Getting page {i}...")
+            get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&page={i}"
+            result = requests.get(get_str).json()
+            if result:
+                results.append(result)
+            else:
+                break
+        with open('downloads.txt', 'w') as filehandle:
+            json.dump(results, filehandle)
+        return True, results
 
     def get_detailed_info(self, download_id):
         """Gets the detailed information about a download from Real-Debrid.
