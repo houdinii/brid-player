@@ -16,30 +16,10 @@ class RDUtilities:
 
     @staticmethod
     def get_magnet_hash(magnet_link):
-        """
-        Extracts and returns the SHA1 hash of a magnet link.
+        """Extracts the hash from a magnet link using list comprehension and returns it.
 
-        This function simply extracts the hash from the magnet link using list comprehension and returns it.
-
-        Parameters
-        ----------
-        magnet_link : str
-            The magnet link to extract the hash from.
-
-        Returns
-        -------
-        str
-            The SHA1 hash of the magnet link.
-
-        See Also
-        --------
-        get_magnet_link(magnet_hash) : Generates magnet links from hashes (NOT IMPLEMENTED).
-
-        Examples
-        --------
-        >>> get_magnet_link("magnet:?xt=urn:btih:8DBB673D4F0AB8BFF6079E0A05C39E85320D4A2A&dn=The.Old.Man.S01E03.WEB.x264-PHOENiX")
-
-        8DBB673D4F0AB8BFF6079E0A05C39E85320D4A2A
+        :param magnet_link: The magnet link to extract the hash from.
+        :return: The SHA1 hash of the magnet link.
         """
 
         # print(f"magnet_link: {magnet_link}")
@@ -54,6 +34,12 @@ class RDUtilities:
         return None
 
     def query_rd_by_hash(self, hash):
+        """Queries Real-Debrid with a hash and returns the result.
+
+        :param hash: SHA1 hash of the file to query.
+        :return: Result dictionary provided by Real-Debrid.
+        """
+
         print(f"AUTH: {self.auth_key}")
         get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
         result = list(requests.get(get_str).json().values())[0]
@@ -64,6 +50,14 @@ class RDUtilities:
             return True, result
 
     def delete_download(self, download_id):
+        """Deletes a download from Real-Debrid.
+
+        TODO: NOT WORKING
+
+        :param download_id: The ID of the download to delete.
+        :return: True if successful, False otherwise.
+        """
+
         delete_str = f"{self.host}/downloads/delete/{download_id}?auth_token={self.auth_key}"
         # get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
         result = requests.delete(delete_str)
@@ -75,6 +69,11 @@ class RDUtilities:
         return result
 
     def check_link(self, link):
+        """Checks if a link is available on Real-Debrid.
+
+        :param link: The link to check.
+        :return: (True, result) if available, (False, None) otherwise."""
+
         if link.startswith("magnet:"):
             hash = self.get_magnet_hash(link)
             print(f"HASH: {hash}")
@@ -90,6 +89,11 @@ class RDUtilities:
             return True, result
 
     def add_magnet(self, magnet):
+        """Adds a magnet link to Real-Debrid.
+
+        :param magnet: The magnet link to add.
+        :return: The True if successful, False otherwise."""
+
         # HTML request header
         headers = {"Authorization": "Bearer " + self.auth_key}
 
@@ -123,6 +127,14 @@ class RDUtilities:
         return True
 
     def get_downloads(self, all=False, page=1, limit=100, offset=0):
+        """Gets the list of downloads from Real-Debrid.
+
+        :param all: If True, returns all downloads, otherwise returns only the first page.
+        :param page: The page number to return.
+        :param limit: The number of downloads to return.
+        :param offset: The offset to start from.
+        :return: The list of downloads."""
+
         if not all:
             get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&offset={offset}&page={page}"
             result = requests.get(get_str).json()
@@ -158,17 +170,32 @@ class RDUtilities:
             return True, results
 
     def get_detailed_info(self, download_id):
+        """Gets the detailed information about a download from Real-Debrid.
+
+        :param download_id: The ID of the download to get information about.
+        :return: The detailed information about the download."""
+
         get_str = f"{self.host}/streaming/mediaInfos/{download_id}?auth_token={self.auth_key}"
         result = requests.get(get_str).json()
         return result
 
     def get_available_formats(self, download_id):
+        """Gets the available formats for a download from Real-Debrid.
+
+        :param download_id: The ID of the download to get information about.
+        :return: The available formats for the download."""
+
         get_str = f"{self.host}/streaming/transcode/{download_id}?auth_token={self.auth_key}"
         result = requests.get(get_str).json()
         return result
 
     @staticmethod
     def process_dl_file(filename):
+        """Processes files from text to json.
+
+        :param filename: The filename of the text file.
+        :return: JSON dictionary of data."""
+
         with open(filename, 'r') as filehandle:
             data = json.load(filehandle)
         return data
