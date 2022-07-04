@@ -59,25 +59,25 @@ function processResults(results) {
         let seeders_html = "";
         let leechers_html = "";
 
-        if (data.thumbnail != null) {thumbnail_html
+        if (data.thumbnail !== null) {thumbnail_html
             += `<img src="${data.thumbnail}" alt="${data.shortName} Thumbnail" onerror='this.style.display = "none"'><br/><br/>`;}
-        if (data.name != null) {name_html
+        if (data.name !== null) {name_html
             += `<h3>${data.name}</h3>`;}
-        if (data.description != null) {description_html
+        if (data.description !== null) {description_html
             += `<em>Description:</em> ${data.description}<br/>`;}
-        if (data.language != null) {language_html
+        if (data.language !== null) {language_html
             += `<em>Language:</em> ${data.language}<br/>`;}
-        if (data.genre != null) {genre_html
+        if (data.genre !== null) {genre_html
             += `<em>Genre:</em> ${data.genre}<br/>`;}
-        if (data.size != null) {size_html
+        if (data.size !== null) {size_html
             += `<em>Size:</em> ${data.size}<br/>`;}
-        if (data.type != null) {type_html
+        if (data.type !== null) {type_html
             += `<em>Type:</em> ${data.type}<br/>`;}
-        if (data.uploadDate != null) {uploadDate_html
+        if (data.uploadDate !== null) {uploadDate_html
             += `<em>Upload Date:</em> ${data.uploadDate}<br/>`;}
-        if (data.seeders != null) {seeders_html
+        if (data.seeders !== null) {seeders_html
             += `<em>Seeders:</em> ${data.seeders}<br/>`;}
-        if (data.leechers != null) {leechers_html
+        if (data.leechers !== null) {leechers_html
             += `<em>Leechers:</em> ${data.leechers}<br/>`;}
 
         html_string += thumbnail_html
