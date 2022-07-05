@@ -1,7 +1,7 @@
 // noinspection JSUnresolvedVariable
 // noinspection UnnecessaryLocalVariableJS
 
-// TODO: Change this to use a settings file
+// Change this to use a settings file
 const host = "http://briandesktop:5001/";
 const max_pages = 5;
 let search_btn = $('.search')
