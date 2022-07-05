@@ -193,7 +193,7 @@ class DBUtilities:
             return None
 
     def get_all_download_records(self):
-        query = f"SELECT * FROM bp_Downloads"
+        query = "SELECT * FROM bp_Downloads"
         try:
             results = self.cursor.execute(query)
             self.conn.commit()
