@@ -43,10 +43,15 @@ class TorrentList(Resource):
                 for item in next_page['items']:
                     results['items'].append(item)
         return results, 200
+        # skipcq: PYL-W0511
         # TODO In the future we should do this:
+        # skipcq: PYL-W0511
         # TODO if torrents.search is successful, return
+        # skipcq: PYL-W0511
         # TODO torrents.search(query), 200
+        # skipcq: PYL-W0511
         # TODO else return
+        # skipcq: PYL-W0511
         # TODO {}, 404
 
 
@@ -75,7 +80,8 @@ class CheckCache(Resource):
         """Check if a link is cached in Real-Debrid
 
         :param link: Link to check
-        :return: (result, 200) if successful, (response, 404) if not"""
+        :return: (result, 200) if successful, (response, 404) if not
+        """
         print(f"link: {link}")
         magnet_list = list(flask.request.args.to_dict().items())
         magnet = "magnet:?"
