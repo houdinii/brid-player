@@ -8,7 +8,6 @@ def read_json(file_path):
     :param file_path: Path to the json file
     :return: Returns a dictionary with the json file content
     """
-
     try:
         with open(file_path, 'r') as f:
             return json.load(f)
@@ -34,7 +33,6 @@ class Settings:
         :param file_path: Path to the JSON file.
         :return: Box object containing the settings.
         """
-
         settings = read_json(file_path)
         if settings is None:
             print("No settings file found.")
