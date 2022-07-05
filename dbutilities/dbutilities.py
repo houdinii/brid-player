@@ -4,9 +4,7 @@ conn = None
 
 
 class DBUtilities:
-    """
-    Set of functions to interact with a SQLite database
-    """
+    """Set of functions to interact with a SQLite database"""
     def __init__(self):
         self.conn = None
         self.cursor = None
