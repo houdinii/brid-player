@@ -33,9 +33,7 @@ class TorrentList(Resource):
 
         print(results)
         pages = int(raw_results['pageCount'])
-        if pages > max_pages:
-            pages = max_pages
-        print(pages, max_pages)
+        pages = min(pages, max_pages)
         if pages > 1:
             print("Multiple pages found.")
             for i in range(1, pages + 1):
