@@ -86,11 +86,7 @@ class CheckCache(Resource):
         print(f"Result: {result}")
         print(f"Data: {data}")
 
-        try:
-            return (result, data), 200
-        except Exception as e:
-            message = json.dumps({"error": f"There was an error! {e}"})
-            return Response(message, status=404, mimetype='application/json')
+        return (result, data), 200
 
 
 class TorrentDetails(Resource):
@@ -266,11 +262,7 @@ class CheckMagnetFromId(Resource):
             result = False
         if magnet is not None:
             result = rd.check_link(magnet)
-        try:
-            return result, 200
-        except Exception as e:
-            message = json.dumps({"error": f"There was an error!{e}"})
-            return Response(message, status=500, mimetype='application/json')
+        return result, 200
 
 
 api.add_resource(TorrentList, '/get/<string:query>')
