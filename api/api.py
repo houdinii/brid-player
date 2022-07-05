@@ -20,6 +20,9 @@ rd = RDUtilities(api_key=settings.config.real_debrid.api_key)
 
 
 class TorrentList(Resource):
+    """
+    Query the 1337x API for a list of torrents from query.
+    """
     @staticmethod
     def get(query, max_pages=10):
         """Get a list of torrents matching a query from 1337x
@@ -56,6 +59,9 @@ class TorrentList(Resource):
 
 
 class TorrentAdd(Resource):
+    """
+    Add a torrent to Real-Debrid.
+    """
     @staticmethod
     def get(torrent_id):
         """Add a torrent to Real-Debrid
@@ -74,6 +80,9 @@ class TorrentAdd(Resource):
 
 
 class CheckCache(Resource):
+    """
+    Check if a torrent is cached on Real-Debrid.
+    """
     # noinspection PyUnusedLocal
     @staticmethod
     def get(link, *args):
@@ -96,6 +105,9 @@ class CheckCache(Resource):
 
 
 class TorrentDetails(Resource):
+    """
+    Get details about a torrent from Real-Debrid.
+    """
     @staticmethod
     def get(torrent_id):
         """Get details about a torrent from 1337x
@@ -112,6 +124,9 @@ class TorrentDetails(Resource):
 
 
 class PopularTVWeek(Resource):
+    """
+    Get a list of popular TV shows this week
+    """
     @staticmethod
     def get():
         """Get a list of popular TV shows this week from 1337x
@@ -126,6 +141,9 @@ class PopularTVWeek(Resource):
 
 
 class PopularTV(Resource):
+    """
+    Get a list of popular TV shows today
+    """
     @staticmethod
     def get():
         """Get a list of popular TV shows today from 1337x
@@ -140,6 +158,9 @@ class PopularTV(Resource):
 
 
 class PopularMovieWeek(Resource):
+    """
+    Get a list of popular movies this week
+    """
     @staticmethod
     def get():
         """Get a list of popular Movies this week from 1337x
@@ -154,6 +175,9 @@ class PopularMovieWeek(Resource):
 
 
 class PopularMovie(Resource):
+    """
+    Get a list of popular Movies today
+    """
     @staticmethod
     def get():
         """Get a list of popular Movies today from 1337x
@@ -168,6 +192,9 @@ class PopularMovie(Resource):
 
 
 class TrendingTVWeek(Resource):
+    """
+    Get a list of trending TV shows this week
+    """
     @staticmethod
     def get():
         """Get a list of trending TV shows this week from 1337x
@@ -182,6 +209,9 @@ class TrendingTVWeek(Resource):
 
 
 class TrendingTV(Resource):
+    """
+    Get a list of trending TV shows today
+    """
     @staticmethod
     def get():
         """Get a list of trending TV shows today from 1337x
@@ -196,6 +226,9 @@ class TrendingTV(Resource):
 
 
 class TrendingMovieWeek(Resource):
+    """
+    Get a list of trending movies this week
+    """
     @staticmethod
     def get():
         """Get a list of trending movies this week from 1337x
@@ -210,6 +243,9 @@ class TrendingMovieWeek(Resource):
 
 
 class TrendingMovie(Resource):
+    """
+    Get a list of trending movies today
+    """
     @staticmethod
     def get():
         """Get a list of trending movies today from 1337x
@@ -224,6 +260,9 @@ class TrendingMovie(Resource):
 
 
 class Top100Movie(Resource):
+    """
+    Get a list of top 100 movies
+    """
     @staticmethod
     def get():
         """Get a list of top 100 movies from 1337x
@@ -252,6 +291,9 @@ class Top100TV(Resource):
 
 
 class CheckMagnetFromId(Resource):
+    """
+    Check if a magnet is cached in Real-Debrid, which should actually be in RDUtilities
+    """
     @staticmethod
     def get(torrent_id):
         """Check if a magnet is cached in Real-Debrid
