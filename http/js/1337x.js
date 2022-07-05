@@ -110,12 +110,12 @@ function processResults(results) {
 
         $(".btnDownload").click(function(){
             const torrentId = $(this).attr("id");
-            console.log(torrentId);
+            
 
             fetch(host + 'add/' + torrentId)
                 // .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+                    
                     alert("Torrent downloaded to Real Debrid")
                 })
                 .catch(error => {
@@ -133,7 +133,7 @@ function processResults(results) {
             fetch(host + 'CheckMagnetFromId/' + torrentId)
                 .then(response => response.json())
                 .then(result => {
-                    console.log(`RESULT: ${result}`);
+                    
                     if (result) {
                         // alert("Magnet link is available!");
                         $('.btnDownload').addClass('found');
@@ -152,7 +152,7 @@ function processResults(results) {
 
     $(".btnDetails").click(function(){
         const torrentId = $(this).attr("id");
-        console.log(torrentId);
+        
         fetch(host + 'details/' + torrentId)
             .then(response => response.json())
             .then(data => {
@@ -170,7 +170,7 @@ function processResults(results) {
     }
 
 function submit_search() {
-    console.log("Searching...")
+    
     const search_string = document.getElementById("txtQuery").value;
     if (search_string === "") {
         alert("Please enter a search string.");
@@ -185,7 +185,7 @@ function submit_search() {
     fetch(host + 'get/' + search_string_encoded)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            
             processResults(data);
         })
     return true;
@@ -212,7 +212,7 @@ function popular(movies=true, week=false){
     fetch(fetch_string)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            
             processResults(data);
         })
     return true;
@@ -239,7 +239,7 @@ function trending(movies=true, week=false){
     fetch(fetch_string)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            
             processResults(data);
         })
     return true;
@@ -256,7 +256,7 @@ function top100(movies=true){
     fetch(fetch_string)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            
             processResults(data);
         })
     return true;
@@ -279,43 +279,43 @@ $(document).ready(function(){
     });
 
     $("#btnPopularMoviesWeek").click(function(){
-        console.log(`btnPopularMoviesWeek Clicked.`);
+        
         popular(true, true);
     })
     $("#btnPopularMovies").click(function(){
-        console.log(`btnPopularMovies Clicked.`);
+        
         popular(true, false);
     })
     $("#btnPopularTVWeek").click(function(){
-        console.log(`btnPopularTVWeek Clicked.`);
+        
         popular(false, true);
     })
     $("#btnPopularTV").click(function(){
-        console.log(`btnPopularTV Clicked.`);
+        
         popular(false, false);
     })
     $("#btnTrendingMoviesWeek").click(function(){
-        console.log(`btnTrendingMoviesWeek Clicked.`);
+        
         trending(true, true);
     })
     $("#btnTrendingMovies").click(function(){
-        console.log(`btnTrendingMovies Clicked.`);
+        
         trending(true, false);
     })
     $("#btnTrendingTVWeek").click(function(){
-        console.log(`btnTrendingTVWeek Clicked.`);
+        
         trending(false, true);
     })
     $("#btnTrendingTV").click(function(){
-        console.log(`btnTrendingTV Clicked.`);
+        
         trending(false, false);
     })
     $("#btnTop100Movies").click(function(){
-        console.log(`btnTop100Movies Clicked.`);
+        
         top100(true);
     })
     $("#btnTop100TV").click(function(){
-        console.log(`btnTop100TV Clicked.`);
+        
         top100(false);
     })
 });
