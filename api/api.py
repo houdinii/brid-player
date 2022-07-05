@@ -1,8 +1,6 @@
-import json
 import pprint
 
 import flask
-from flask import Response
 from flask_cors import CORS
 from flask_restful import Api, Resource
 from py1337x import py1337x
