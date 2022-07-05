@@ -6,9 +6,7 @@ pp = pprint.PrettyPrinter(indent=4).pprint
 
 
 class RDUtilities:
-    """
-    Set of utilities for interacting with the Real-Debrid API
-    """
+    """Set of utilities for interacting with the Real-Debrid API"""
     def __init__(self, api_key=None):
         self.auth_key = api_key
         self.protocol = "https://"

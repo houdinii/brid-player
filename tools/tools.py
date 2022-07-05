@@ -23,9 +23,7 @@ def read_json(file_path):
 
 
 class Settings:
-    """
-    Class for holding the application wide settings.
-    """
+    """Class for holding the application wide settings."""
     def __init__(self, file_path):
         self.config = self.get_settings(file_path)
 
