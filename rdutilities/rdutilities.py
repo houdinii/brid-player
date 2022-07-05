@@ -20,7 +20,6 @@ class RDUtilities:
         :param magnet_link: The magnet link to extract the hash from.
         :return: The SHA1 hash of the magnet link.
         """
-
         result = magnet_link.split('?')[1]
         result_list = result.split('&')
 
@@ -37,7 +36,6 @@ class RDUtilities:
         :param hash: SHA1 hash of the file to query.
         :return: Result dictionary provided by Real-Debrid.
         """
-
         print(f"AUTH: {self.auth_key}")
         get_str = f"{self.host}/torrents/instantAvailability/{hash}?auth_token={self.auth_key}"
         result = list(requests.get(get_str).json().values())[0]
@@ -54,7 +52,6 @@ class RDUtilities:
         :param download_id: The ID of the download to delete.
         :return: True if successful, False otherwise.
         """
-
         delete_str = f"{self.host}/downloads/delete/{download_id}?auth_token={self.auth_key}"
         result = requests.delete(delete_str)
         print(f"RESULT: {result}")
@@ -65,7 +62,6 @@ class RDUtilities:
 
         :param link: The link to check.
         :return: (True, result) if available, (False, None) otherwise."""
-
         if link.startswith("magnet:"):
             hash = self.get_magnet_hash(link)
             print(f"HASH: {hash}")
@@ -85,7 +81,6 @@ class RDUtilities:
 
         :param magnet: The magnet link to add.
         :return: The True if successful, False otherwise."""
-
         # HTML request header
         headers = {"Authorization": "Bearer " + self.auth_key}
 
@@ -126,7 +121,6 @@ class RDUtilities:
         :param limit: The number of downloads to return.
         :param offset: The offset to start from.
         :return: The list of downloads."""
-
         if not all:
             get_str = f"{self.host}/downloads/?auth_token={self.auth_key}&limit={limit}&offset={offset}&page={page}"
             result = requests.get(get_str).json()
@@ -164,7 +158,6 @@ class RDUtilities:
 
         :param download_id: The ID of the download to get information about.
         :return: The detailed information about the download."""
-
         get_str = f"{self.host}/streaming/mediaInfos/{download_id}?auth_token={self.auth_key}"
         result = requests.get(get_str).json()
         return result
@@ -174,7 +167,6 @@ class RDUtilities:
 
         :param download_id: The ID of the download to get information about.
         :return: The available formats for the download."""
-
         get_str = f"{self.host}/streaming/transcode/{download_id}?auth_token={self.auth_key}"
         result = requests.get(get_str).json()
         return result
@@ -185,7 +177,6 @@ class RDUtilities:
 
         :param filename: The filename of the text file.
         :return: JSON dictionary of data."""
-
         with open(filename, 'r') as filehandle:
             data = json.load(filehandle)
         return data

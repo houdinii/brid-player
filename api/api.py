@@ -28,7 +28,6 @@ class TorrentList(Resource):
         :param max_pages: Maximum number of pages to search
         :return: List of torrents
         """
-
         raw_results = torrents.search(query)
         results = {'items': raw_results['items']}
 
@@ -61,7 +60,6 @@ class TorrentAdd(Resource):
         :param torrent_id: ID of the torrent to add
         :return: (result, 200) if successful, (response, 404) if not
         """
-
         info = torrents.info(torrentId=torrent_id)
         magnet = info['magnetLink']
         result = rd.add_magnet(magnet)
@@ -105,7 +103,6 @@ class TorrentDetails(Resource):
         :param torrent_id: ID of the torrent to get details about
         :return: (result, 200) if successful, (response, 404) if not
         """
-
         info = torrents.info(torrentId=torrent_id)
 
         if info:
@@ -123,7 +120,6 @@ class PopularTVWeek(Resource):
 
         :return: (results, 200)
         """
-
         results = torrents.popular(category='tv', week=True)
         print(results)
         return results, 200
@@ -236,7 +232,6 @@ class Top100Movie(Resource):
 
         :return: (results, 200)
         """
-
         results = torrents.top(category='movies')
         print(results)
         return results, 200
@@ -251,7 +246,6 @@ class Top100TV(Resource):
 
         :return: (results, 200)
         """
-
         results = torrents.top(category='tv')
         print(results)
         return results, 200
@@ -265,7 +259,6 @@ class CheckMagnetFromId(Resource):
         :param torrent_id: ID of the torrent to check
         :return: (result, 200) if successful, (response, 500) if not
         """
-
         print(f"Torrent ID: {torrent_id}")
         info = torrents.info(torrentId=torrent_id)
         pp(info)
